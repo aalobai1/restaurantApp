@@ -12,16 +12,21 @@ import Firebase
 class FavouriteRestaurantsTableViewController: UITableViewController, UISearchResultsUpdating {
     var resultSearchController = UISearchController()
        
-       var restaurants = Restaurants()
-       var availableRestaurants = [Restaurant]()
-       var filteredRestaurants = [Restaurant]()
-       var users = Users()
-       
+   var restaurants = Restaurants()
+   var availableRestaurants = [Restaurant]()
+   var filteredRestaurants = [Restaurant]()
+   var users = Users()
+    var currentUser: User!
+    
        override func viewDidLoad() {
            super.viewDidLoad()
-           configureTableView()
+            navigationItem.title = "Favorite Restaurants"
+        configureTableView()
        }
-       
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchRestaurants()
+    }
        override func numberOfSections(in tableView: UITableView) -> Int {
            return 1
        }
@@ -86,19 +91,51 @@ extension FavouriteRestaurantsTableViewController {
         self.tableView.separatorStyle = .none
         
         setupSearch()
-        fetchRestaurants()
+        fetchCurrentUser()
         tableView.reloadData()
     }
     
-    func fetchRestaurants() {
+    func fetchCurrentUser() {
         startLoading()
         let currentUser = Auth.auth().currentUser!
         users.findUser(withId: currentUser.uid) { (user, err) in
             if err != nil {
-                
+                self.alert(message: err!.localizedDescription)
             } else {
-                
+                self.currentUser = user!
+                self.fetchRestaurants()
             }
+        }
+    }
+    
+    func fetchRestaurants() {
+        restaurants.fetchRestaurants { (err) in
+            if (err != nil) {
+                self.alert(message: err!.localizedDescription)
+            } else {
+                self.getFavouriteRestaurants()
+            }
+        }
+    }
+    
+    func getFavouriteRestaurants() {
+        if(self.presentedViewController != nil) {
+            dismiss(animated: false) {
+                self.filterForFavouriteRestaurants()
+            }
+        } else {
+            self.filterForFavouriteRestaurants()
+        }
+    }
+    
+    func filterForFavouriteRestaurants() {
+        print(self.restaurants.availableRestaurants)
+        if let favRests = self.currentUser!.favouriteRestaurants {
+            self.availableRestaurants = self.restaurants.favouriteRestaurants(favouriteRestaurantIds: favRests)
+            self.tableView.reloadData()
+        } else {
+            self.availableRestaurants = []
+            self.tableView.reloadData()
         }
     }
     
@@ -108,6 +145,7 @@ extension FavouriteRestaurantsTableViewController {
                 let indexPath = tableView.indexPathForSelectedRow!.row
                 if (resultSearchController.isActive) {
                     restaurantDetailViewController.restaurant = filteredRestaurants[indexPath]
+                    restaurantDetailViewController.restaurants = self.restaurants
                 } else {
                     restaurantDetailViewController.restaurant = availableRestaurants[indexPath]
                 }

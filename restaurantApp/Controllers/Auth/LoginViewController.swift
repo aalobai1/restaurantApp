@@ -28,11 +28,11 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // Check if the user is logged in
-//        if UserDefaults.standard.object(forKey: "USER_KEY_UID") != nil {
-//            let users = Users()
-//            users.findUserType(withId: UserDefaults.standard.value(forKey: "USER_KEY_UID") as! String, completion: goToClientOrAdmin)
-//        }
+//         Check if the user is logged in
+        if UserDefaults.standard.object(forKey: "USER_KEY_UID") != nil {
+            let users = Users()
+            users.findUserType(withId: UserDefaults.standard.value(forKey: "USER_KEY_UID") as! String, completion: goToClientOrAdmin)
+        }
     }
     
     @IBAction func loginButton(_ sender: UIButton) {
@@ -60,14 +60,15 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func goToNextScreen(error: Error?, user: AuthDataResult?) {
-        dismiss(animated: false, completion: nil)
-        if error != nil {
-            alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
-        } else if user != nil {
-            UserDefaults.standard.set(Auth.auth().currentUser!.uid, forKey: "USER_KEY_UID")
-            UserDefaults.standard.synchronize()
-            let users = Users()
-            users.findUserType(withId: user!.user.uid, completion: goToClientOrAdmin)
+        dismiss(animated: false) {
+          if error != nil {
+            self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
+              } else if user != nil {
+                  UserDefaults.standard.set(Auth.auth().currentUser!.uid, forKey: "USER_KEY_UID")
+                  UserDefaults.standard.synchronize()
+                  let users = Users()
+            users.findUserType(withId: user!.user.uid, completion: self.goToClientOrAdmin)
+              }
         }
     }
     

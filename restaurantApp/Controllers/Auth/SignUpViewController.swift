@@ -44,12 +44,14 @@ class SignUpViewController: UIViewController {
      }
      
      func goToNextScreen(error: Error?, user: AuthDataResult?) {
-        dismiss(animated: false, completion: nil)
-         if error != nil {
-             alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
-         } else if user != nil {
-            self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
-         }
+        dismiss(animated: false) {
+            if error != nil {
+                self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
+            } else if user != nil {
+               print("signed up user")
+               self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
+            }
+        }
      }
      
      override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -203,9 +203,9 @@
 		E573232423B28D32001E43D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5BB8D9023B6691200184A2D /* Auth */,
 				E573233123B29556001E43D1 /* Admin */,
 				E573233023B2954E001E43D1 /* Client */,
-				E573231223B28BBA001E43D1 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,6 +276,14 @@
 				E573234E23B3CB35001E43D1 /* UIImageViewExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E5BB8D9023B6691200184A2D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E573231223B28BBA001E43D1 /* Main.storyboard */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

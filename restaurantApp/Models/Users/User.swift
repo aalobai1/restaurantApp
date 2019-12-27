@@ -96,7 +96,7 @@ class User {
             } else {
                 for document in snapshot!.documents {
                     collection.document(document.documentID).updateData([
-                        "favouriteRestaurants" : [restaurant.uid]
+                        "favouriteRestaurants" : FieldValue.arrayUnion([restaurant.uid])
                     ]) { (err) in
                         if err != nil {
                             completion(err)

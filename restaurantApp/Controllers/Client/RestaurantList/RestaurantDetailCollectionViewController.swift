@@ -12,8 +12,10 @@ import Firebase
 class RestaurantDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var restaurant: Restaurant!
+    var restaurants: Restaurants!
     var menuItems = [MenuItem]()
     var users = Users()
+    var favouriteButtonActive = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,34 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
     @IBAction func favouriteButtonPressed(_ sender: UIBarButtonItem) {
+        if favouriteButtonActive {
+            favouriteRestaurant()
+        } else {
+            unfavouriteRestaurant()
+        }
+        favouriteButtonActive = !favouriteButtonActive
+    }
+    
+    func favouriteRestaurant() {
+        let currentUser = Auth.auth().currentUser
+        users.findUser(withId: currentUser!.uid) { (user, err) in
+            if err != nil {
+                self.alert(message: err!.localizedDescription)
+            } else {
+                user!.favouriteRestaurant(restaurant: self.restaurant) { (err) in
+                    if err != nil {
+                        self.alert(message: err!.localizedDescription)
+                    } else {
+                        self.alert(message: "Restaurant Successfuly favourited")
+                    }
+                }
+            }
+        }
+    }
+
+    func unfavouriteRestaurant() {
         let currentUser = Auth.auth().currentUser
         users.findUser(withId: currentUser!.uid) { (user, err) in
             if err != nil {
@@ -58,14 +87,20 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     }
 }
 
+
+
 extension RestaurantDetailCollectionViewController {
-    func configureCollectionView() {
+    func configureNavigationBar() {
         navigationItem.title = restaurant.name
         collectionView.backgroundColor = UIColor.white
         collectionView.register(MenuItemCell.self, forCellWithReuseIdentifier: "Cell")
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
+    }
+    
+    func configureCollectionView() {
+        configureNavigationBar()
         fetchMenuItems()
         collectionView.reloadData()
     }
@@ -79,5 +114,8 @@ extension RestaurantDetailCollectionViewController {
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    func currentRestaurantFavourited() {
     }
 }

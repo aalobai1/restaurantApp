@@ -27,6 +27,7 @@ class RestaurantListTableViewController: UITableViewController, UISearchResultsU
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Available Restaurants"
         configureTableView()
     }
     
