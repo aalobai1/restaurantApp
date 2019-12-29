@@ -14,7 +14,8 @@ extension RestaurantListTableViewController {
         filteredRestaurants.removeAll(keepingCapacity: false)
         
         let filteredItems = availableRestaurants.filter { (restaurant) -> Bool in
-            return (restaurant.name.contains(searchController.searchBar.text!))
+            let name = restaurant.name.lowercased()
+            return (name.contains(searchController.searchBar.text!.lowercased()))
         }
         
         filteredRestaurants = filteredItems
@@ -38,6 +39,7 @@ extension RestaurantListTableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 200
         self.tableView.separatorStyle = .none
+        self.navigationItem.title = "Available Restaurants"
         
         setupSearch()
         fetchRestaurants()
@@ -45,13 +47,11 @@ extension RestaurantListTableViewController {
     }
     
     func fetchRestaurants() {
-        startLoading()
         restaurants.fetchRestaurants { (err) in
             if (err != nil) {
                 self.alert(message: err!.localizedDescription)
             } else {
                 self.availableRestaurants = self.restaurants.availableRestaurants
-                self.dismiss(animated: false, completion: nil)
                 self.tableView.reloadData()
             }
         }

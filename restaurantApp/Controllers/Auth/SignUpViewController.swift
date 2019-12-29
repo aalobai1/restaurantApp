@@ -15,6 +15,9 @@ class SignUpViewController: UIViewController {
     var password: String!
     var confirmedPassword: String!
     
+    var currentUser: User!
+    var usersStore: Users! = Users()
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordtextField: UITextField!
     @IBOutlet weak var confirmedPasswordtext: UITextField!
@@ -43,13 +46,15 @@ class SignUpViewController: UIViewController {
          }
      }
      
-     func goToNextScreen(error: Error?, user: AuthDataResult?) {
-        dismiss(animated: false, completion: nil)
-         if error != nil {
-             alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
-         } else if user != nil {
-            self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
-         }
+    func goToNextScreen(error: Error?, authUser: AuthDataResult?, user: User?) {
+        dismiss(animated: false) {
+            if error != nil {
+                self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
+            } else if authUser != nil {
+               self.currentUser = user
+               self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
+            }
+        }
      }
      
      override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,5 +87,14 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController {
     func checkPassword(password: String, confirmedPassword: String) -> Bool {
              return password == confirmedPassword
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToHomeScreen" {
+            if let nextViewController = segue.destination as? ClientTabBarController {
+                nextViewController.currentUser = self.currentUser
+                nextViewController.usersStore = self.usersStore
+            }
+        }
     }
 }

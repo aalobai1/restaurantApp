@@ -14,20 +14,16 @@ class RestaurantCell: UITableViewCell {
     var mainImage : UIImage?
     var favoriteButton: UIButton!
     
-    var titleView : UITextView = {
-        var textView = UITextView()
+    var titleView : UILabel = {
+        var textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        textView.font = UIFont(name: "Noto Sans Kannada", size: 30)
+        textView.font = UIFont(name: "Noto Sans Kannada", size: 20)
         return textView
     }()
     
-    var infoView : UITextView = {
-        var textView = UITextView()
+    var infoView : UILabel = {
+        var textView = UILabel()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isEditable = false
-        textView.isScrollEnabled = false
         return textView
     }()
     
@@ -38,50 +34,58 @@ class RestaurantCell: UITableViewCell {
         return imageView
     }()
     
-    var stackView = UIStackView()
+    var mainStackView : UIStackView = {
+        var stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        return stack
+    }()
+    
+    var textStackView : UIStackView = {
+        var stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 0
+        return stack
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        favoriteButton = UIButton()
+        self.addSubview(mainStackView)
         
-        self.addSubview(mainImageView)
-        self.addSubview(stackView)
-        self.addSubview(favoriteButton)
-        
+        configureMainStack()
         configureMainImage()
         configureMessageView()
-        configureFavoriteButton()
+       
+        
+        self.backgroundColor = UIColor.gray
         
         self.layoutMargins = UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
     }
     
+    func configureMainStack() {
+        mainStackView.addArrangedSubview(textStackView)
+        mainStackView.addArrangedSubview(mainImageView)
+    }
+    
     func configureMainImage() {
-        mainImageView.leftAnchor.constraint(equalTo: self.mainImageView.leftAnchor).isActive = true
         mainImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         mainImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         
-        mainImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        mainImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         mainImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
     func configureMessageView() {
-        stackView.axis = .vertical
-        stackView.addArrangedSubview(titleView)
-        stackView.addArrangedSubview(infoView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        textStackView.addArrangedSubview(titleView)
+        textStackView.addArrangedSubview(infoView)
+        textStackView.distribution = .fillProportionally
         
-        stackView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    func configureFavoriteButton() {
-
-        favoriteButton.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        favoriteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
+        textStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        textStackView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        textStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
     }
     
     override func layoutSubviews() {

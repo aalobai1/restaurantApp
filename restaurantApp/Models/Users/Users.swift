@@ -13,24 +13,7 @@ class Users {
     
     var allUsers: [User] = []
     
-    func findUserType(withId uid: String, completion: @escaping (_ type: UserType) -> Void) {
-        let db = Firestore.firestore()
-        let collection = db.collection("users")
-        var userType: UserType = .client
-        collection.whereField("uuid", isEqualTo: uid).getDocuments { (snapshot, err) in
-            if err != nil {
-                print("error")
-            } else {
-                for document in snapshot!.documents {
-                    let type = document.get("type") as! String
-                    userType = UserType(rawValue: type)!
-                    completion(userType)
-                }
-            }
-        }
-    }
-    
-    func findUser(withId uid: String, completion: @escaping (_ user: User?,_ error: Error?) -> Void) {
+    func fetchUser(withId uid: String, completion: @escaping (_ user: User?,_ error: Error?) -> Void) {
         let db = Firestore.firestore()
         let collection = db.collection("users")
         collection.whereField("uuid", isEqualTo: uid).getDocuments { (snapshot, err) in
