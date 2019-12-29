@@ -13,6 +13,10 @@ class LoginViewController: UIViewController {
     var email: String!
     var password: String!
     
+    var currentUser: User!
+    var usersStore: Users! = Users()
+    var restaurants = Restaurants()
+    
     @IBOutlet var buttonCollection: [UIButton]!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,8 +34,16 @@ class LoginViewController: UIViewController {
 
 //         Check if the user is logged in
         if UserDefaults.standard.object(forKey: "USER_KEY_UID") != nil {
-            let users = Users()
-            users.findUserType(withId: UserDefaults.standard.value(forKey: "USER_KEY_UID") as! String, completion: goToClientOrAdmin)
+            let id = UserDefaults.standard.value(forKey: "USER_KEY_UID") as! String
+            usersStore.fetchUser(withId: id) { (user, err) in
+                if err != nil {
+                    self.alert(message: "Please Login")
+                } else {
+                    self.currentUser = user!
+                    self.goToClientOrAdmin(type: user!.type)
+                }
+            }
+            
         }
     }
     
@@ -59,17 +71,21 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
-    func goToNextScreen(error: Error?, user: AuthDataResult?) {
+    func goToNextScreen(error: Error?, authUser: AuthDataResult?, user: User?) {
         dismiss(animated: false) {
           if error != nil {
             self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
-              } else if user != nil {
-                  UserDefaults.standard.set(Auth.auth().currentUser!.uid, forKey: "USER_KEY_UID")
-                  UserDefaults.standard.synchronize()
-                  let users = Users()
-            users.findUserType(withId: user!.user.uid, completion: self.goToClientOrAdmin)
-              }
+              } else if authUser != nil {
+                self.saveUserDefaults()
+                self.currentUser = user
+                self.goToClientOrAdmin(type: user!.type)
+            }
         }
+    }
+    
+    func saveUserDefaults() {
+        UserDefaults.standard.set(Auth.auth().currentUser!.uid, forKey: "USER_KEY_UID")
+        UserDefaults.standard.synchronize()
     }
     
     func goToClientOrAdmin(type: UserType) {
@@ -77,6 +93,16 @@ extension LoginViewController {
             self.performSegue(withIdentifier: "goToAdminScreen", sender: nil)
         } else if type == .client {
             self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToHomeScreen" {
+            if let nextViewController = segue.destination as? ClientTabBarController {
+                nextViewController.currentUser = self.currentUser
+                nextViewController.usersStore = self.usersStore
+                nextViewController.restaurants = self.restaurants
+            }
         }
     }
 }

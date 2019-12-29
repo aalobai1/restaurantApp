@@ -20,15 +20,37 @@ struct CellData {
 
 class RestaurantListTableViewController: UITableViewController, UISearchResultsUpdating {
     var resultSearchController = UISearchController()
-    
-    var restaurants = Restaurants()
     var availableRestaurants = [Restaurant]()
     var filteredRestaurants = [Restaurant]()
     
+    var restaurants: Restaurants! {
+        get {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            return tabBar.restaurants
+        } set {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            tabBar.restaurants = newValue
+        }
+    }
+    
+    var currentUser: User! {
+        get {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            return tabBar.currentUser
+        } set {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            tabBar.currentUser = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Available Restaurants"
         configureTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

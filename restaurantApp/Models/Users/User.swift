@@ -19,7 +19,7 @@ class User {
     var password: String
     var uuid: String!
     var type: UserType!
-    var favouriteRestaurants: [String]?
+    var favouriteRestaurants: [String] = []
     
     init(email: String, password: String) {
         self.email = email
@@ -30,28 +30,30 @@ class User {
         self.init(email: email, password: "")
         self.uuid = uuid
         self.type = UserType(rawValue: type)
-        self.favouriteRestaurants = favouriteRestaurants
+        if favouriteRestaurants != nil {
+            self.favouriteRestaurants = favouriteRestaurants!
+        }
     }
     
     
-    func signUp(completion: @escaping (_ error: Error?,_ result: AuthDataResult?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { (user, err) in
+    func signUp(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
-                completion(err, nil)
+                completion(err, nil, nil)
             } else {
-                completion(nil, user)
-                self.uuid = user!.user.uid
+                self.uuid = authUser!.user.uid
                 self.createUser(ofType: .client)
+                completion(nil, authUser, self)
             }
         }
     }
     
-    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?) -> Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { (user, err) in
+    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
-                completion(err, nil)
+                completion(err, nil, nil)
             } else {
-                completion(nil, user)
+                completion(nil, authUser, self)
             }
         }
     }
@@ -101,6 +103,35 @@ class User {
                         if err != nil {
                             completion(err)
                         } else {
+                            self.favouriteRestaurants.append(restaurant.uid)
+                            completion(nil)
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func unfavouriteRestaurant(restaurant: Restaurant, completion: @escaping (_ error: Error?) -> Void) {
+        let db = Firestore.firestore()
+        let collection = db.collection("users")
+    
+        collection.whereField("uuid", isEqualTo: self.uuid!).getDocuments { (snapshot, err) in
+            if err != nil {
+               completion(err)
+               print("we didnt get it fam")
+            } else {
+                for document in snapshot!.documents {
+                    collection.document(document.documentID).updateData([
+                        "favouriteRestaurants" : FieldValue.arrayRemove([restaurant.uid])
+                    ]) { (err) in
+                        if err != nil {
+                            completion(err)
+                        } else {
+                            if let index = self.favouriteRestaurants.firstIndex(of: restaurant.uid) {
+                                self.favouriteRestaurants.remove(at: index)
+                            }
                             completion(nil)
                         }
                     }
@@ -108,5 +139,6 @@ class User {
             }
         }
     }
+
 }
 

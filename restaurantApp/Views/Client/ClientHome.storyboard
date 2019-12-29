@@ -55,7 +55,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56u-vU-LWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2684" y="635"/>
+            <point key="canvasLocation" x="-2613" y="635"/>
         </scene>
         <!--Profile-->
         <scene sceneID="WEB-zg-d5z">
@@ -297,6 +297,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favouriteButton" destination="Vp0-Qg-kXf" id="cxN-NI-wLE"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XO-aS-Uwu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -305,7 +308,7 @@
         <!--Restaurants-->
         <scene sceneID="bOs-do-i5D">
             <objects>
-                <navigationController id="rAn-kt-s0o" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="rAn-kt-s0o" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Restaurants" image="list.dash" catalog="system" id="9Jj-LA-qyP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NLn-01-3q9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

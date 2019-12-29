@@ -39,6 +39,7 @@ extension RestaurantListTableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 200
         self.tableView.separatorStyle = .none
+        self.navigationItem.title = "Available Restaurants"
         
         setupSearch()
         fetchRestaurants()
@@ -62,7 +63,6 @@ extension RestaurantListTableViewController {
                 let indexPath = tableView.indexPathForSelectedRow!.row
                 if (resultSearchController.isActive) {
                     restaurantDetailViewController.restaurant = filteredRestaurants[indexPath]
-                    restaurantDetailViewController.restaurants = self.restaurants
                 } else {
                     restaurantDetailViewController.restaurant = availableRestaurants[indexPath]
                 }

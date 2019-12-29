@@ -10,16 +10,43 @@ import UIKit
 import Firebase
 
 class RestaurantDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
     var restaurant: Restaurant!
-    var restaurants: Restaurants!
+    
+     var currentUser: User! {
+           get {
+               let tabBar = self.tabBarController! as! ClientTabBarController
+               return tabBar.currentUser
+           } set {
+               let tabBar = self.tabBarController! as! ClientTabBarController
+               tabBar.currentUser = newValue
+           }
+       }
+    
     var menuItems = [MenuItem]()
+    
     var users = Users()
     var favouriteButtonActive = false
-
+    
+    @IBOutlet weak var favouriteButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureFavouriteButton()
+    }
+    
+    func configureFavouriteButton() {
+        if (self.currentUser.favouriteRestaurants.contains(restaurant.uid)) {
+            self.favouriteButtonActive = true
+            self.favouriteButton.image = UIImage(systemName: "heart.fill")
+        } else {
+            self.favouriteButtonActive = false
+            self.favouriteButton.image = UIImage(systemName: "heart")
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,45 +72,35 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     
     @IBAction func favouriteButtonPressed(_ sender: UIBarButtonItem) {
         if favouriteButtonActive {
-            favouriteRestaurant()
-        } else {
             unfavouriteRestaurant()
+            favouriteButton.image = UIImage(systemName: "heart")
+        } else {
+            favouriteRestaurant()
+            favouriteButton.image = UIImage(systemName: "heart.fill")
         }
         favouriteButtonActive = !favouriteButtonActive
     }
     
     func favouriteRestaurant() {
-        let currentUser = Auth.auth().currentUser
-        users.findUser(withId: currentUser!.uid) { (user, err) in
+        self.currentUser!.favouriteRestaurant(restaurant: self.restaurant) { (err) in
             if err != nil {
                 self.alert(message: err!.localizedDescription)
             } else {
-                user!.favouriteRestaurant(restaurant: self.restaurant) { (err) in
-                    if err != nil {
-                        self.alert(message: err!.localizedDescription)
-                    } else {
-                        self.alert(message: "Restaurant Successfuly favourited")
-                    }
-                }
+                self.alert(message: "Restaurant Successfuly favourited")
+                self.collectionView.reloadData()
             }
         }
     }
 
     func unfavouriteRestaurant() {
-        let currentUser = Auth.auth().currentUser
-        users.findUser(withId: currentUser!.uid) { (user, err) in
-            if err != nil {
-                self.alert(message: err!.localizedDescription)
-            } else {
-                user!.favouriteRestaurant(restaurant: self.restaurant) { (err) in
-                    if err != nil {
-                        self.alert(message: err!.localizedDescription)
-                    } else {
-                        self.alert(message: "Restaurant Successfuly favourited")
-                    }
-                }
-            }
-        }
+        self.currentUser!.unfavouriteRestaurant(restaurant: self.restaurant) { (err) in
+             if err != nil {
+                 self.alert(message: err!.localizedDescription)
+             } else {
+                self.alert(message: "Restaurant removed from favourites")
+                self.collectionView.reloadData()
+             }
+         }
     }
 }
 
@@ -114,8 +131,5 @@ extension RestaurantDetailCollectionViewController {
                 self.collectionView.reloadData()
             }
         }
-    }
-    
-    func currentRestaurantFavourited() {
     }
 }
