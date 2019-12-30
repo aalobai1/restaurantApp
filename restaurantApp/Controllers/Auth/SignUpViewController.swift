@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController {
     
     var currentUser: User!
     var usersStore: Users! = Users()
+    var restaurants: Restaurants = Restaurants()
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordtextField: UITextField!
@@ -94,6 +95,7 @@ extension SignUpViewController {
             if let nextViewController = segue.destination as? ClientTabBarController {
                 nextViewController.currentUser = self.currentUser
                 nextViewController.usersStore = self.usersStore
+                nextViewController.restaurants = self.restaurants
             }
         }
     }

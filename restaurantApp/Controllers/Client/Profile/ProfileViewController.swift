@@ -17,6 +17,17 @@ class ProfileViewController: UIViewController {
 
     var email: String = ""
     
+    
+    var currentUser: User! {
+        get {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            return tabBar.currentUser
+        } set {
+            let tabBar = self.tabBarController! as! ClientTabBarController
+            tabBar.currentUser = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prefillValues()
@@ -25,13 +36,21 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logout(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-            self.performSegue(withIdentifier: "goToHome", sender: nil)
-            UserDefaults.standard.removeObject(forKey: "USER_KEY_UID")
-            UserDefaults.standard.synchronize()
-        } catch {
-            alert(message: "Oops something went wrong :-(")
+//        do {
+//            try Auth.auth().signOut()
+//            self.performSegue(withIdentifier: "goToHome", sender: nil)
+//            UserDefaults.standard.removeObject(forKey: "USER_KEY_UID")
+//            UserDefaults.standard.synchronize()
+//        } catch {
+//            alert(message: "Oops something went wrong :-(")
+//        }
+        
+        currentUser.logout { (err, loggedOut) in
+            if err != nil {
+                self.alert(message: err!.localizedDescription)
+            } else {
+                self.performSegue(withIdentifier: "goToHome", sender: nil)
+            }
         }
     }
     
