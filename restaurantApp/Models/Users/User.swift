@@ -18,7 +18,7 @@ class User {
     var email: String
     var password: String
     var uuid: String!
-    var type: UserType!
+    var type: UserType! = .client
     var favouriteRestaurants: [String] = []
     
     init(email: String, password: String) {
@@ -53,6 +53,7 @@ class User {
             if err != nil {
                 completion(err, nil, nil)
             } else {
+                print(self.email)
                 completion(nil, authUser, self)
             }
         }
@@ -61,7 +62,6 @@ class User {
     func logout(completion: @escaping (_ error: Error?, _ loggedOut: Bool) -> Void) {
         do {
             try Auth.auth().signOut()
-            
             UserDefaults.standard.removeObject(forKey: "USER_KEY_UID")
             UserDefaults.standard.synchronize()
             completion(nil, true)

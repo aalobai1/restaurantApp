@@ -70,12 +70,12 @@ class FavouriteRestaurantsTableViewController: UITableViewController, UISearchRe
 
         if (resultSearchController.isActive) {
             cell.message = RestaurantInfo(title: filteredRestaurants[indexPath.row].name, info: filteredRestaurants[indexPath.row].location)
-            cell.mainImageView.loadImageUsingCacheWithUrlString(urlString: filteredRestaurants[indexPath.row].logoImageUrl)
+            cell.logoImage.loadImageUsingCacheWithUrlString(urlString: filteredRestaurants[indexPath.row].logoImageUrl)
             return cell
         }
         else {
             cell.message = RestaurantInfo(title: availableRestaurants[indexPath.row].name, info: availableRestaurants[indexPath.row].location)
-            cell.mainImageView.loadImageUsingCacheWithUrlString(urlString: availableRestaurants[indexPath.row].logoImageUrl)
+            cell.logoImage.loadImageUsingCacheWithUrlString(urlString: availableRestaurants[indexPath.row].logoImageUrl)
             return cell
         }
     }
@@ -106,10 +106,11 @@ extension FavouriteRestaurantsTableViewController {
     }
     
     func configureTableView() {
-        self.tableView.register(RestaurantCell.self, forCellReuseIdentifier: "Cell")
+//        self.tableView.register(RestaurantCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 200
         self.tableView.separatorStyle = .none
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!]
         
         setupSearch()
         tableView.reloadData()
