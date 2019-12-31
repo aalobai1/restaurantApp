@@ -1,15 +1,19 @@
 //
-//  RestaurantDetailViewController.swift
+//  MenuViewController.swift
 //  restaurantApp
 //
-//  Created by Ali Alobaidi on 12/26/19.
+//  Created by Ali Alobaidi on 12/30/19.
 //  Copyright © 2019 Ali Alobaidi. All rights reserved.
 //
 
 import UIKit
-import Firebase
 
-class RestaurantDetailCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var navigationButtons: [UIButton]!
+    @IBOutlet weak var favoriteButton: UIBarButtonItem!
+    
      var currentUser: User! {
         get {
             let tabBar = self.tabBarController! as! ClientTabBarController
@@ -20,22 +24,19 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
         }
     }
     
-    let menuBar : MenuBar = {
-        let mb = MenuBar()
-        return mb
-    }()
-    
     var menuItems = [MenuItem]()
     var users = Users()
     var favouriteButtonActive = false
     
     var restaurant: Restaurant!
     
-    @IBOutlet weak var favouriteButton: UIBarButtonItem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = self
+        collectionView.delegate = self
         configureCollectionView()
+
+        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,11 +44,15 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
         configureFavouriteButton()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return menuItems.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MenuItemCell
         cell.menuItemTitle = menuItems[indexPath.row].name
         cell.menuItemDescription = menuItems[indexPath.row].description
@@ -67,13 +72,30 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     @IBAction func favouriteButtonPressed(_ sender: UIBarButtonItem) {
         if favouriteButtonActive {
             unfavouriteRestaurant()
-            favouriteButton.image = UIImage(systemName: "heart")
+            favoriteButton.image = UIImage(systemName: "heart")
         } else {
             favouriteRestaurant()
-            favouriteButton.image = UIImage(systemName: "heart.fill")
+            favoriteButton.image = UIImage(systemName: "heart.fill")
         }
         favouriteButtonActive = !favouriteButtonActive
     }
+    
+    @IBAction func navigationButtonPressed(_ sender: UIButton) {
+        if (sender.tag == 0) {
+            self.menuItems = self.restaurant.menu!.menuItems
+            collectionView.reloadData()
+        } else if (sender.tag == 1) {
+            self.menuItems = self.restaurant.menu!.menuItems.filter({ (menuItem) -> Bool in
+                return menuItem.type == .Entree
+            })
+        } else if (sender.tag == 2) {
+            self.menuItems = self.restaurant.menu!.menuItems.filter({ (menuItem) -> Bool in
+                return menuItem.type == .Other
+            })
+        }
+        collectionView.reloadData()
+    }
+    
     
     func favouriteRestaurant() {
         self.currentUser!.favouriteRestaurant(restaurant: self.restaurant) { (err) in
@@ -98,14 +120,27 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     }
 }
 
-extension RestaurantDetailCollectionViewController {
+extension MenuViewController {
+    func configureCollectionView() {
+        configureNavigationBar()
+        configureNavigationButtons()
+        fetchMenuItems()
+        collectionView.reloadData()
+    }
+    
     func configureFavouriteButton() {
         if (self.currentUser.favouriteRestaurants.contains(restaurant.uid)) {
             self.favouriteButtonActive = true
-            self.favouriteButton.image = UIImage(systemName: "heart.fill")
+            self.favoriteButton.image = UIImage(systemName: "heart.fill")
         } else {
             self.favouriteButtonActive = false
-            self.favouriteButton.image = UIImage(systemName: "heart")
+            self.favoriteButton.image = UIImage(systemName: "heart")
+        }
+    }
+    
+    func configureNavigationButtons() {
+        for button in navigationButtons {
+            button.layer.cornerRadius = 10.0
         }
     }
     
@@ -113,24 +148,9 @@ extension RestaurantDetailCollectionViewController {
         navigationItem.title = restaurant.name
         collectionView.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 18)!]
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.headerReferenceSize = CGSize(width: 0, height: 70)
         collectionView.collectionViewLayout = layout
-    }
-    
-    func configureCollectionView() {
-        configureNavigationBar()
-        fetchMenuItems()
-        setupMenuBar()
-        collectionView.reloadData()
-    }
-    
-    func setupMenuBar() {
-        view.addSubview(menuBar)
-        view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat("V:|[v0(50)]|", views: menuBar)
     }
     
     func fetchMenuItems() {

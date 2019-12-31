@@ -138,7 +138,7 @@ extension RestaurantListCollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailView" {
-            if let restaurantDetailViewController = segue.destination as? RestaurantDetailCollectionViewController {
+            if let restaurantDetailViewController = segue.destination as? MenuViewController {
                 let indexPath = tableView.indexPathForSelectedRow!.row
                 if (resultSearchController.isActive) {
                     restaurantDetailViewController.restaurant = filteredRestaurants[indexPath]
