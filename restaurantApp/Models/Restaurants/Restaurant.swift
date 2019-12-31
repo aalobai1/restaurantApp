@@ -44,12 +44,12 @@ class Restaurant {
                 let menuItemsArray = document!.get("menuItems") as? [[String: String]]
                 var menuItems: [MenuItem] = []
                     
-                    menuItems = menuItemsArray!.map({ (item) in
+                menuItems = menuItemsArray!.map({ (item) in
                     let name = item["name"]!
                     let description = item["description"]!
                     let type = MenuItemType(rawValue: item["type"]!)!
                     let imageUrl = item["imageUrl"]!
-                        return MenuItem(name: name, description: description, type: type, imageUrl: imageUrl)
+                    return MenuItem(name: name, description: description, type: type, imageUrl: imageUrl)
                 })
             
                 self.menu = Menu(restaurantName: restaurantName!, menuItems: menuItems)

@@ -35,6 +35,7 @@
 		E573234D23B3CA50001E43D1 /* GlobalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573234C23B3CA50001E43D1 /* GlobalExtensions.swift */; };
 		E573234F23B3CB35001E43D1 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573234E23B3CB35001E43D1 /* UIImageViewExtensions.swift */; };
 		E58099DA23B9C61E00F2B62C /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58099D923B9C61E00F2B62C /* HeaderCollectionReusableView.swift */; };
+		E58099DC23BA68A500F2B62C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58099DB23BA68A500F2B62C /* MenuViewController.swift */; };
 		E586948723B92981008125BB /* RestaurantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E586948623B92981008125BB /* RestaurantCollectionViewCell.swift */; };
 		E58694AD23B9559D008125BB /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = E586949A23B95458008125BB /* Montserrat-Black.otf */; };
 		E58694AE23B9559D008125BB /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E58694AA23B9545B008125BB /* Montserrat-BlackItalic.otf */; };
@@ -108,6 +109,7 @@
 		E573234C23B3CA50001E43D1 /* GlobalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalExtensions.swift; sourceTree = "<group>"; };
 		E573234E23B3CB35001E43D1 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		E58099D923B9C61E00F2B62C /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		E58099DB23BA68A500F2B62C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E586948623B92981008125BB /* RestaurantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCollectionViewCell.swift; sourceTree = "<group>"; };
 		E586948923B95455008125BB /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
 		E586948A23B95456008125BB /* MontserratAlternates-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Bold.otf"; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				E53A88E423B59C9E00741787 /* MenuItemCell.swift */,
 				E53A88DF23B546F200741787 /* MenuBar.swift */,
 				E58099D923B9C61E00F2B62C /* HeaderCollectionReusableView.swift */,
+				E58099DB23BA68A500F2B62C /* MenuViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				E573230D23B28BBA001E43D1 /* AppDelegate.swift in Sources */,
 				E58099DA23B9C61E00F2B62C /* HeaderCollectionReusableView.swift in Sources */,
 				E573232723B28D47001E43D1 /* SignUpViewController.swift in Sources */,
+				E58099DC23BA68A500F2B62C /* MenuViewController.swift in Sources */,
 				E573234823B32F82001E43D1 /* Restaurants.swift in Sources */,
 				E573232923B28D4F001E43D1 /* LoginViewController.swift in Sources */,
 				E573234D23B3CA50001E43D1 /* GlobalExtensions.swift in Sources */,
