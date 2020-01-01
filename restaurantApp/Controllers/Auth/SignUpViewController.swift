@@ -27,6 +27,8 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordtextField.isSecureTextEntry = true
+        confirmedPasswordtext.isSecureTextEntry = true
         for button in buttonCollection {
             button.layer.cornerRadius = 10
         }
