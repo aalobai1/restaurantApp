@@ -42,10 +42,10 @@
                                                     <rect key="frame" x="10" y="10" width="374" height="120"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ktf-C7-85z">
-                                                            <rect key="frame" x="0.0" y="38" width="264" height="44.5"/>
+                                                            <rect key="frame" x="0.0" y="37.5" width="264" height="45.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcS-cm-IOa">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="164" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="164" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="8MW-a9-5jL"/>
                                                                     </constraints>
@@ -54,7 +54,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SH7-P8-yia">
-                                                                    <rect key="frame" x="0.0" y="24.5" width="116.5" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="24.5" width="132" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -142,14 +142,14 @@
                                 <rect key="frame" x="10" y="54" width="394" height="739"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVp-cH-7wB">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="69"/>
                                         <state key="normal" title="Logout"/>
                                         <connections>
                                             <action selector="logout:" destination="bD5-Bi-JSn" eventType="touchUpInside" id="e6h-Xq-b0H"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="BSf-ML-UzJ" userLabel="Info Stack View">
-                                        <rect key="frame" x="0.0" y="130" width="394" height="202"/>
+                                        <rect key="frame" x="0.0" y="129" width="394" height="202"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kzd-vA-9zk">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="22"/>
@@ -217,16 +217,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-NI-OhM" userLabel="Terms and Conditions">
-                                        <rect key="frame" x="0.0" y="392" width="394" height="347"/>
+                                        <rect key="frame" x="0.0" y="391" width="394" height="348"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms and Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7j-GZ-EFj">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="21"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Kuu-VG-STv">
-                                                <rect key="frame" x="0.0" y="30" width="394" height="317"/>
+                                                <rect key="frame" x="0.0" y="31" width="394" height="317"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <string key="text">Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
 
@@ -279,7 +279,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhl-Ol-s2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-383" y="651"/>
+            <point key="canvasLocation" x="-639" y="635"/>
         </scene>
         <!--Main-->
         <scene sceneID="glU-h7-wPs">
@@ -310,164 +310,6 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
             </objects>
             <point key="canvasLocation" x="-638" y="-106"/>
         </scene>
-        <!--Restaurant Detail Collection View Controller-->
-        <scene sceneID="tot-G0-4BN">
-            <objects>
-                <collectionViewController id="HEc-Br-oz1" customClass="RestaurantDetailCollectionViewController" customModule="restaurantApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PYY-MU-rG1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3GT-gQ-dt8">
-                            <size key="itemSize" width="391" height="218"/>
-                            <size key="headerReferenceSize" width="50" height="68"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="rvn-tN-1TQ" customClass="MenuItemCell" customModule="restaurantApp" customModuleProvider="target">
-                                <rect key="frame" x="11.5" y="68" width="391" height="218"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="58B-mL-so7">
-                                    <rect key="frame" x="0.0" y="0.0" width="391" height="218"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Suf-t1-DaO">
-                                            <rect key="frame" x="10" y="10" width="371" height="198"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wd7-fS-rYl">
-                                                    <rect key="frame" x="5" y="5" width="361" height="188"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pYp-15-wWV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="122"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="qkc-sc-dbQ"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="EMF-Y1-sLn">
-                                                            <rect key="frame" x="0.0" y="130" width="361" height="58"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C25-fu-sMr">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="25"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="25" id="Tzb-1p-fz0"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="22"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk9-NR-FhT">
-                                                                    <rect key="frame" x="0.0" y="33" width="361" height="25"/>
-                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="Vk9-NR-FhT" firstAttribute="height" secondItem="C25-fu-sMr" secondAttribute="height" id="Sur-RX-JhJ"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="pYp-15-wWV" secondAttribute="trailing" id="9CW-si-Zd0"/>
-                                                        <constraint firstItem="EMF-Y1-sLn" firstAttribute="leading" secondItem="wd7-fS-rYl" secondAttribute="leading" id="CwW-ab-pEH"/>
-                                                        <constraint firstItem="pYp-15-wWV" firstAttribute="leading" secondItem="wd7-fS-rYl" secondAttribute="leading" id="JgI-mQ-5V5"/>
-                                                        <constraint firstAttribute="trailing" secondItem="EMF-Y1-sLn" secondAttribute="trailing" id="jI4-gM-PYY"/>
-                                                    </constraints>
-                                                </stackView>
-                                            </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            <constraints>
-                                                <constraint firstItem="wd7-fS-rYl" firstAttribute="leading" secondItem="Suf-t1-DaO" secondAttribute="leading" constant="5" id="BKK-1q-Itn"/>
-                                                <constraint firstAttribute="bottom" secondItem="wd7-fS-rYl" secondAttribute="bottom" constant="5" id="LmC-oT-UoG"/>
-                                                <constraint firstItem="wd7-fS-rYl" firstAttribute="top" secondItem="Suf-t1-DaO" secondAttribute="top" constant="5" id="PAw-pE-T86"/>
-                                                <constraint firstAttribute="trailing" secondItem="wd7-fS-rYl" secondAttribute="trailing" constant="5" id="wfa-Qc-QO5"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Suf-t1-DaO" firstAttribute="top" secondItem="58B-mL-so7" secondAttribute="top" constant="10" id="7Er-68-XNT"/>
-                                        <constraint firstItem="Suf-t1-DaO" firstAttribute="leading" secondItem="58B-mL-so7" secondAttribute="leading" constant="10" id="HTo-Ox-Uf0"/>
-                                        <constraint firstAttribute="bottom" secondItem="Suf-t1-DaO" secondAttribute="bottom" constant="10" id="S5t-OS-6jQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="Suf-t1-DaO" secondAttribute="trailing" constant="10" id="b4F-yN-1Sz"/>
-                                    </constraints>
-                                </collectionViewCellContentView>
-                                <size key="customSize" width="391" height="218"/>
-                                <connections>
-                                    <outlet property="mainView" destination="Suf-t1-DaO" id="YQz-lx-9KJ"/>
-                                    <outlet property="menuItemDescriptionLbl" destination="Vk9-NR-FhT" id="rlG-a6-5Sd"/>
-                                    <outlet property="menuItemImage" destination="pYp-15-wWV" id="lno-BF-hDC"/>
-                                    <outlet property="menuItemName" destination="C25-fu-sMr" id="LuO-3w-8ei"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewHeader" id="xDR-xz-dhh" customClass="HeaderCollectionReusableView" customModule="restaurantApp" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="jsi-i8-ULv">
-                                    <rect key="frame" x="18" y="13" width="378" height="42"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQK-xf-5tI">
-                                            <rect key="frame" x="0.0" y="6" width="99.5" height="30"/>
-                                            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" title="All">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqB-7T-Yrk">
-                                            <rect key="frame" x="139.5" y="6" width="99" height="30"/>
-                                            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" title="Entrees">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THk-cv-9gs">
-                                            <rect key="frame" x="278.5" y="6" width="99.5" height="30"/>
-                                            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" title="Other">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="THk-cv-9gs" firstAttribute="width" secondItem="sQK-xf-5tI" secondAttribute="width" id="Kbp-1p-Skb"/>
-                                        <constraint firstItem="RqB-7T-Yrk" firstAttribute="width" secondItem="sQK-xf-5tI" secondAttribute="width" id="nKe-gr-qwy"/>
-                                    </constraints>
-                                </stackView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="bottomMargin" secondItem="jsi-i8-ULv" secondAttribute="bottom" constant="5" id="0xZ-av-a7P"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="jsi-i8-ULv" secondAttribute="trailing" constant="10" id="dXU-Jm-0gR"/>
-                                <constraint firstItem="jsi-i8-ULv" firstAttribute="top" secondItem="xDR-xz-dhh" secondAttribute="topMargin" constant="5" id="kBm-zm-p2X"/>
-                                <constraint firstItem="jsi-i8-ULv" firstAttribute="leading" secondItem="xDR-xz-dhh" secondAttribute="leadingMargin" constant="10" id="ySJ-tJ-q80"/>
-                            </constraints>
-                            <connections>
-                                <outletCollection property="tabBarButtons" destination="sQK-xf-5tI" collectionClass="NSMutableArray" id="CO0-xS-Ndf"/>
-                                <outletCollection property="tabBarButtons" destination="RqB-7T-Yrk" collectionClass="NSMutableArray" id="J1s-rb-mBZ"/>
-                                <outletCollection property="tabBarButtons" destination="THk-cv-9gs" collectionClass="NSMutableArray" id="pYl-xW-br4"/>
-                            </connections>
-                        </collectionReusableView>
-                        <connections>
-                            <outlet property="dataSource" destination="HEc-Br-oz1" id="S80-P0-Ugq"/>
-                            <outlet property="delegate" destination="HEc-Br-oz1" id="agl-3E-eZ9"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="DJD-fU-C68">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="Vp0-Qg-kXf">
-                            <connections>
-                                <action selector="favouriteButtonPressed:" destination="HEc-Br-oz1" id="igM-Yd-ONR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="favouriteButton" destination="Vp0-Qg-kXf" id="cxN-NI-wLE"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1XO-aS-Uwu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1739" y="688"/>
-        </scene>
         <!--Restaurants-->
         <scene sceneID="bOs-do-i5D">
             <objects>
@@ -483,7 +325,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QM2-Dv-jJF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="-46"/>
+            <point key="canvasLocation" x="325" y="-106"/>
         </scene>
         <!--Restaurant List Collection View Controller-->
         <scene sceneID="nH8-ZC-fiK">
@@ -508,10 +350,10 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                     <rect key="frame" x="10" y="10" width="374" height="124"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="x3a-iv-8Kz">
-                                                            <rect key="frame" x="0.0" y="40" width="264" height="44.5"/>
+                                                            <rect key="frame" x="0.0" y="39.5" width="264" height="45.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDl-oz-kC0">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="164" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="164" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="CHu-Ow-Rvu"/>
                                                                     </constraints>
@@ -520,7 +362,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jv8-yj-XMS">
-                                                                    <rect key="frame" x="0.0" y="24.5" width="116.5" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="24.5" width="132" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -578,7 +420,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5f-Dj-NXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102.8985507246377" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="1362" y="-106"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="GLF-W2-1Jg">
@@ -786,7 +628,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVT-3R-R4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2137.68115942029" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="325" y="635"/>
         </scene>
     </scenes>
     <resources>
@@ -795,6 +637,6 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
         <image name="person" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hxZ-nq-yL9"/>
+        <segue reference="MYh-LM-PuI"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -35,7 +35,6 @@ class User {
         }
     }
     
-    
     func signUp(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
@@ -48,13 +47,12 @@ class User {
         }
     }
     
-    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
+    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
-                completion(err, nil, nil)
+                completion(err, nil)
             } else {
-                print(self.email)
-                completion(nil, authUser, self)
+                completion(nil, authUser)
             }
         }
     }
@@ -82,7 +80,7 @@ class User {
         
         collection.addDocument(data: userData) { (err) in
             if err != nil {
-                print("erro")
+                print("error")
             }
         }
     }

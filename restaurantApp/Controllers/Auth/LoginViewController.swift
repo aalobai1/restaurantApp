@@ -43,7 +43,6 @@ class LoginViewController: UIViewController {
                     self.goToClientOrAdmin(type: user!.type)
                 }
             }
-            
         }
     }
     
@@ -71,14 +70,20 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
-    func goToNextScreen(error: Error?, authUser: AuthDataResult?, user: User?) {
+    func goToNextScreen(error: Error?, authUser: AuthDataResult?) {
         dismiss(animated: false) {
           if error != nil {
             self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
-              } else if authUser != nil {
+          } else if authUser != nil {
                 self.saveUserDefaults()
-                self.currentUser = user
-                self.goToClientOrAdmin(type: user!.type)
+                self.usersStore.fetchUser(withId: authUser!.user.uid) { (fetchedUser, err) in
+                    if (err != nil) {
+                        self.alert(message: "Something went wrong")
+                    } else {
+                        self.currentUser = fetchedUser
+                        self.goToClientOrAdmin(type: fetchedUser!.type)
+                    }
+                }
             }
         }
     }
