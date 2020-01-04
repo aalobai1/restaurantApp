@@ -27,13 +27,20 @@ class LoginViewController: UIViewController {
         for button in buttonCollection {
             button.layer.cornerRadius = 10
         }
+        self.navigationItem.hidesBackButton = true
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.hidesBottomBarWhenPushed = true
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//         Check if the user is logged in
+//         Check if the user is logged inexamp
         if UserDefaults.standard.object(forKey: "USER_KEY_UID") != nil {
             let id = UserDefaults.standard.value(forKey: "USER_KEY_UID") as! String
             usersStore.fetchUser(withId: id) { (user, err) in
@@ -105,6 +112,13 @@ extension LoginViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToHomeScreen" {
             if let nextViewController = segue.destination as? ClientTabBarController {
+                nextViewController.currentUser = self.currentUser
+                nextViewController.usersStore = self.usersStore
+                nextViewController.restaurants = self.restaurants
+            }
+        }
+        else if segue.identifier == "goToAdminScreen" {
+            if let nextViewController = segue.destination as? AdminTabBarController {
                 nextViewController.currentUser = self.currentUser
                 nextViewController.usersStore = self.usersStore
                 nextViewController.restaurants = self.restaurants

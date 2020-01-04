@@ -40,6 +40,7 @@ class RestaurantDetailCollectionViewController: UICollectionViewController, UICo
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
         configureFavouriteButton()
     }
     
@@ -112,7 +113,6 @@ extension RestaurantDetailCollectionViewController {
     func configureNavigationBar() {
         navigationItem.title = restaurant.name
         collectionView.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 18)!]
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

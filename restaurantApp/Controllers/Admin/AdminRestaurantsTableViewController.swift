@@ -8,37 +8,27 @@
 
 import UIKit
 
-struct RestaurantInfo {
-    let title: String
-    let info: String?
-}
-
-struct CellData {
-    let image : UIImage?
-    let message : RestaurantInfo?
-}
-
-class RestaurantListCollectionViewController: UITableViewController, UISearchResultsUpdating {
+class AdminRestaurantsTableViewController: UITableViewController, UISearchResultsUpdating {
     var resultSearchController = UISearchController()
     var availableRestaurants = [Restaurant]()
     var filteredRestaurants = [Restaurant]()
     
     var restaurants: Restaurants! {
         get {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             return tabBar.restaurants
         } set {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             tabBar.restaurants = newValue
         }
     }
     
     var currentUser: User! {
         get {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             return tabBar.currentUser
         } set {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             tabBar.currentUser = newValue
         }
     }
@@ -50,9 +40,6 @@ class RestaurantListCollectionViewController: UITableViewController, UISearchRes
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.layer.borderWidth = 0.0
         tableView.reloadData()
     }
     
@@ -69,7 +56,7 @@ class RestaurantListCollectionViewController: UITableViewController, UISearchRes
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToDetailView", sender: nil)
+        performSegue(withIdentifier: "goToEditView", sender: nil)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,7 +76,7 @@ class RestaurantListCollectionViewController: UITableViewController, UISearchRes
     }
 }
 
-extension RestaurantListCollectionViewController {
+extension AdminRestaurantsTableViewController {
     func updateSearchResults(for searchController: UISearchController) {
         filteredRestaurants.removeAll(keepingCapacity: false)
         
@@ -107,32 +94,21 @@ extension RestaurantListCollectionViewController {
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.searchBar.sizeToFit()
-            
-            controller.searchBar.searchBarStyle = .default
-            
-            controller.searchBar.setTextField(color: UIColor.white)
-            controller.searchBar.set(textColor: UIColor.black)
-            controller.searchBar.setSearchImage(color: UIColor.black)
-            
             controller.hidesNavigationBarDuringPresentation = false
-            controller.searchBar.placeholder = "Find a restaurant!"
-            controller.searchBar.isTranslucent = false
             
+            controller.searchBar.placeholder = "Find your restaurant!"
             tableView.tableHeaderView = controller.searchBar
+
             return controller
         })()
     }
     
     func configureTableView() {
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.white
-        
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
-        
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 200
+        self.tableView.separatorStyle = .none
         self.navigationItem.title = "Available Restaurants"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!]
         
         setupSearch()
         fetchRestaurants()
@@ -151,8 +127,8 @@ extension RestaurantListCollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToDetailView" {
-            if let restaurantDetailViewController = segue.destination as? MenuViewController {
+        if segue.identifier == "goToEditView" {
+            if let restaurantDetailViewController = segue.destination as? AdminMenuViewController {
                 let indexPath = tableView.indexPathForSelectedRow!.row
                 if (resultSearchController.isActive) {
                     restaurantDetailViewController.restaurant = filteredRestaurants[indexPath]

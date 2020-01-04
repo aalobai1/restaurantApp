@@ -39,12 +39,18 @@ class FavouriteRestaurantsTableViewController: UITableViewController, UISearchRe
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Favorite Restaurants"
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.layer.borderWidth = 0.0
         configureTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         filterForFavouriteRestaurants()
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.layer.borderWidth = 0.0
         tableView.reloadData()
     }
     

@@ -8,19 +8,17 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
+class AdminMenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var navigationButtons: [UIButton]!
     @IBOutlet weak var favoriteButton: UIBarButtonItem!
-    @IBOutlet weak var navigationButtonsContainer: UIView!
     
      var currentUser: User! {
         get {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             return tabBar.currentUser
         } set {
-            let tabBar = self.tabBarController! as! ClientTabBarController
+            let tabBar = self.tabBarController! as! AdminTabBarController
             tabBar.currentUser = newValue
         }
     }
@@ -35,9 +33,6 @@ class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        navigationButtonsContainer.tintColor = UIColor(hexString: orangeAccent)
-        navigationButtonsContainer.layer.borderWidth = 0.0
-        navigationController?.navigationBar.shadowImage = UIImage()
         configureCollectionView()
 
         // Do any additional setup after loading the view.
@@ -45,9 +40,6 @@ class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
-        navigationController?.navigationBar.layer.borderWidth = 0.0
-        navigationController?.navigationBar.shadowImage = UIImage()
         configureFavouriteButton()
     }
     
@@ -66,6 +58,10 @@ class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         cell.menuItemImage.loadImageUsingCacheWithUrlString(urlString: menuItems[indexPath.row].imageUrl)
         cell.layoutSubviews()
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "editMenuItem", sender: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -127,7 +123,7 @@ class MenuViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     }
 }
 
-extension MenuViewController {
+extension AdminMenuViewController {
     func configureCollectionView() {
         configureNavigationBar()
         configureNavigationButtons()
@@ -147,14 +143,14 @@ extension MenuViewController {
     
     func configureNavigationButtons() {
         for button in navigationButtons {
-            button.layer.cornerRadius = 5.0
+            button.layer.cornerRadius = 10.0
         }
     }
     
     func configureNavigationBar() {
         navigationItem.title = restaurant.name
         collectionView.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 18)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 18)!]
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView.collectionViewLayout = layout
@@ -167,6 +163,15 @@ extension MenuViewController {
             } else {
                 self.menuItems = self.restaurant.menu!.menuItems
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editMenuItem" {
+            if let nextViewController = segue.destination as? EditMenuItemViewController {
+                let indexPath = sender as! IndexPath
+                nextViewController.menuItem = self.menuItems[indexPath.row]
             }
         }
     }

@@ -40,9 +40,15 @@ class User {
             if err != nil {
                 completion(err, nil, nil)
             } else {
-                self.uuid = authUser!.user.uid
-                self.createUser(ofType: .client)
-                completion(nil, authUser, self)
+                self.sendVerificationEmail { (err) in
+                    if err != nil {
+                        completion(err, nil, nil)
+                    } else {
+                        self.uuid = authUser!.user.uid
+                        self.createUser(ofType: .client)
+                        completion(nil, authUser, self)
+                    }
+                }
             }
         }
     }
@@ -137,6 +143,20 @@ class User {
             }
         }
     }
-
+    
+    func sendVerificationEmail(completion: @escaping (_ sendEmailError: Error?) -> Void) {
+        let authUser = Auth.auth().currentUser
+        if authUser != nil && !authUser!.isEmailVerified {
+            authUser?.sendEmailVerification(completion: { (err) in
+                if err != nil {
+                    completion(err)
+                } else {
+                    completion(nil)
+                }
+            })
+        } else {
+            print("something went wrong")
+        }
+    }
 }
 
