@@ -40,7 +40,7 @@ class RestaurantCell: UITableViewCell {
         mainView.layer.borderColor = UIColor.clear.cgColor
         mainView.layer.masksToBounds = false
         
-        mainView.layer.backgroundColor = UIColor(hexString: "#E8E8E8").cgColor
+//        mainView.layer.backgroundColor = UIColor(hexString: "#82AEC8").cgColor
         mainView.layer.applySketchShadow(y: 1)
     }
 }

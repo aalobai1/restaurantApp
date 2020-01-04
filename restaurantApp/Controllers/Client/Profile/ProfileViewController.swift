@@ -31,20 +31,14 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prefillValues()
+        navigationItem.title = "Profile"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
         emailTextField.isUserInteractionEnabled = false
         passwordTextField.isUserInteractionEnabled = false
     }
     
-    @IBAction func logout(_ sender: UIButton) {
-//        do {
-//            try Auth.auth().signOut()
-//            self.performSegue(withIdentifier: "goToHome", sender: nil)
-//            UserDefaults.standard.removeObject(forKey: "USER_KEY_UID")
-//            UserDefaults.standard.synchronize()
-//        } catch {
-//            alert(message: "Oops something went wrong :-(")
-//        }
-        
+    @IBAction func logout(_ sender: UIBarButtonItem) {
         currentUser.logout { (err, loggedOut) in
             if err != nil {
                 self.alert(message: err!.localizedDescription)
@@ -104,5 +98,11 @@ class ProfileViewController: UIViewController {
         let currentUser = Auth.auth().currentUser
         self.emailTextField.text = currentUser!.email
         self.passwordTextField.text = "**********"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goTohHome" {
+            self.hidesBottomBarWhenPushed = true
+        }
     }
 }

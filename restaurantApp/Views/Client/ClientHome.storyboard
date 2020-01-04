@@ -113,14 +113,15 @@
             </objects>
             <point key="canvasLocation" x="-1686.9565217391305" y="634.82142857142856"/>
         </scene>
-        <!--Favorites-->
+        <!--Favourites-->
         <scene sceneID="s9p-yo-pZw">
             <objects>
                 <navigationController id="Rea-kV-FiW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart" catalog="system" id="ffL-ZS-GpU"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="heart" catalog="system" id="ffL-ZS-GpU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UlG-LF-1n5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="ntN-Os-eGE" kind="relationship" relationship="rootViewController" id="7W5-Uq-CNq"/>
@@ -133,48 +134,53 @@
         <!--Profile-->
         <scene sceneID="WEB-zg-d5z">
             <objects>
-                <viewController id="bD5-Bi-JSn" customClass="ProfileViewController" customModule="restaurantApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="bD5-Bi-JSn" customClass="ProfileViewController" customModule="restaurantApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2f5-5o-4hI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Oao-nM-W7W" userLabel="Main Stack View">
-                                <rect key="frame" x="10" y="54" width="394" height="739"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Oao-nM-W7W" userLabel="Main Stack View">
+                                <rect key="frame" x="10" y="98" width="394" height="695"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVp-cH-7wB">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="69"/>
-                                        <state key="normal" title="Logout"/>
-                                        <connections>
-                                            <action selector="logout:" destination="bD5-Bi-JSn" eventType="touchUpInside" id="e6h-Xq-b0H"/>
-                                        </connections>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="BSf-ML-UzJ" userLabel="Info Stack View">
-                                        <rect key="frame" x="0.0" y="129" width="394" height="202"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="258"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kzd-vA-9zk">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="40"/>
+                                                <color key="tintColor" red="0.97429913280000002" green="0.60078495740000004" blue="0.57253515720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="q2o-ZW-yoV"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97429913280000002" green="0.60078495740000004" blue="0.57253515720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rky-df-d7G">
-                                                <rect key="frame" x="0.0" y="28" width="394" height="34"/>
+                                                <rect key="frame" x="0.0" y="46" width="394" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="6ha-6a-bXK"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="YgX-4L-juS">
-                                                <rect key="frame" x="0.0" y="68" width="394" height="30"/>
+                                                <rect key="frame" x="0.0" y="92" width="394" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfL-4X-URF">
-                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="96" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="34" id="mT6-Rf-cGP"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="tintColor" red="0.51055312159999999" green="0.68301874399999996" blue="0.78260892630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Reset Email?"/>
                                                         <connections>
                                                             <action selector="resetEmailPressed:" destination="bD5-Bi-JSn" eventType="touchUpInside" id="chg-dC-9z6"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87K-Hf-ADz">
-                                                        <rect key="frame" x="246" y="0.0" width="148" height="30"/>
+                                                        <rect key="frame" x="246" y="0.0" width="148" height="34"/>
+                                                        <color key="tintColor" red="0.51055312159999999" green="0.68301874399999996" blue="0.78260892630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Confirm Changes"/>
                                                         <connections>
                                                             <action selector="confirmChangesButtonPressed:" destination="bD5-Bi-JSn" eventType="touchUpInside" id="hjs-dU-98C"/>
@@ -183,18 +189,28 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1c-HP-Ezx">
-                                                <rect key="frame" x="0.0" y="104" width="394" height="22"/>
+                                                <rect key="frame" x="0.0" y="132" width="394" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="sUf-bk-ykC"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97429913280000002" green="0.60078495740000004" blue="0.57253515720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="COb-Da-DhB">
-                                                <rect key="frame" x="0.0" y="132" width="394" height="34"/>
+                                                <rect key="frame" x="0.0" y="178" width="394" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="B6n-KU-fG2"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyy-s2-1aN">
-                                                <rect key="frame" x="0.0" y="172" width="394" height="30"/>
+                                                <rect key="frame" x="0.0" y="224" width="394" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="EcM-W0-XWH"/>
+                                                </constraints>
+                                                <color key="tintColor" red="0.51055312159999999" green="0.68301874399999996" blue="0.78260892630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Reset Password?"/>
                                                 <connections>
                                                     <action selector="resetPasswordPressed:" destination="bD5-Bi-JSn" eventType="touchUpInside" id="KQL-fp-CSN"/>
@@ -217,16 +233,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JeO-NI-OhM" userLabel="Terms and Conditions">
-                                        <rect key="frame" x="0.0" y="391" width="394" height="348"/>
+                                        <rect key="frame" x="0.0" y="318" width="394" height="377"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms and Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7j-GZ-EFj">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="21"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.97429913280000002" green="0.60078495740000004" blue="0.57253515720000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Kuu-VG-STv">
-                                                <rect key="frame" x="0.0" y="31" width="394" height="317"/>
+                                                <rect key="frame" x="0.0" y="31" width="394" height="346"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <string key="text">Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
 
@@ -250,9 +266,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="JeO-NI-OhM" secondAttribute="trailing" id="MhK-kJ-VPG"/>
-                                    <constraint firstItem="AVp-cH-7wB" firstAttribute="leading" secondItem="Oao-nM-W7W" secondAttribute="leading" id="Ocm-l2-6cS"/>
                                     <constraint firstItem="JeO-NI-OhM" firstAttribute="leading" secondItem="Oao-nM-W7W" secondAttribute="leading" id="P1Y-p4-V0a"/>
-                                    <constraint firstAttribute="trailing" secondItem="AVp-cH-7wB" secondAttribute="trailing" id="PFZ-fC-Q30"/>
                                     <constraint firstAttribute="trailing" secondItem="BSf-ML-UzJ" secondAttribute="trailing" id="R3u-Np-t7O"/>
                                     <constraint firstItem="BSf-ML-UzJ" firstAttribute="leading" secondItem="Oao-nM-W7W" secondAttribute="leading" id="jwL-PI-sL7"/>
                                 </constraints>
@@ -268,7 +282,14 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tky-F1-yH0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="YSW-F2-w6F"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Profile" image="person" catalog="system" id="YSW-F2-w6F"/>
+                    <navigationItem key="navigationItem" id="4L4-rF-HfP">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" image="arrowshape.turn.up.right" catalog="system" id="UWl-6W-Ywx">
+                            <connections>
+                                <action selector="logout:" destination="bD5-Bi-JSn" id="Zir-ca-jzd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="confirmChangesButton" destination="87K-Hf-ADz" id="c5V-Jw-F9j"/>
                         <outlet property="emailTextField" destination="Rky-df-d7G" id="Ivs-H0-Rup"/>
@@ -279,7 +300,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhl-Ol-s2e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-383" y="651"/>
+            <point key="canvasLocation" x="-639" y="1298"/>
         </scene>
         <!--Main-->
         <scene sceneID="glU-h7-wPs">
@@ -289,35 +310,37 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YcW-3f-Kcc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-326" y="1087"/>
+            <point key="canvasLocation" x="-639" y="1884"/>
         </scene>
         <!--Client Tab Bar Controller-->
         <scene sceneID="UzP-0Q-BuN">
             <objects>
                 <tabBarController modalPresentationStyle="fullScreen" id="dai-S4-XwR" customClass="ClientTabBarController" customModule="restaurantApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mi4-ud-kCd">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mi4-ud-kCd" customClass="CustomizedTabBar" customModule="restaurantApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rAn-kt-s0o" kind="relationship" relationship="viewControllers" id="D9A-6I-nKV"/>
-                        <segue destination="bD5-Bi-JSn" kind="relationship" relationship="viewControllers" id="Nnj-0y-bhn"/>
                         <segue destination="Rea-kV-FiW" kind="relationship" relationship="viewControllers" id="eAe-PB-xVY"/>
+                        <segue destination="rAn-kt-s0o" kind="relationship" relationship="viewControllers" id="D9A-6I-nKV"/>
+                        <segue destination="szq-oh-1eY" kind="relationship" relationship="viewControllers" id="RXD-Vf-1LZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uM8-qn-3wI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-638" y="-106"/>
         </scene>
-        <!--Restaurants-->
+        <!--Navigation Controller-->
         <scene sceneID="bOs-do-i5D">
             <objects>
                 <navigationController modalPresentationStyle="fullScreen" id="rAn-kt-s0o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Restaurants" image="list.dash" catalog="system" id="9Jj-LA-qyP"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="" id="9Jj-LA-qyP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NLn-01-3q9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="3F3-xT-Yuw" kind="relationship" relationship="rootViewController" id="9Z4-4i-7Nb"/>
@@ -325,7 +348,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QM2-Dv-jJF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="-46"/>
+            <point key="canvasLocation" x="325" y="-106"/>
         </scene>
         <!--Restaurant List Collection View Controller-->
         <scene sceneID="nH8-ZC-fiK">
@@ -347,10 +370,10 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                             <rect key="frame" x="10" y="10" width="394" height="144"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TO5-ZB-djK">
-                                                    <rect key="frame" x="10" y="10" width="374" height="124"/>
+                                                    <rect key="frame" x="10" y="0.0" width="374" height="144"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="x3a-iv-8Kz">
-                                                            <rect key="frame" x="0.0" y="39.5" width="264" height="45.5"/>
+                                                            <rect key="frame" x="0.0" y="49.5" width="264" height="45.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDl-oz-kC0">
                                                                     <rect key="frame" x="0.0" y="0.0" width="164" height="21"/>
@@ -358,14 +381,14 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                                         <constraint firstAttribute="height" constant="30" id="CHu-Ow-Rvu"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="20"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jv8-yj-XMS">
                                                                     <rect key="frame" x="0.0" y="24.5" width="132" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -374,7 +397,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                             </constraints>
                                                         </stackView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kht-X2-jym">
-                                                            <rect key="frame" x="274" y="0.0" width="100" height="124"/>
+                                                            <rect key="frame" x="274" y="7" width="100" height="130"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="130" id="1dm-cn-U7y"/>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="KHs-gm-p2T"/>
@@ -383,16 +406,17 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="TO5-ZB-djK" secondAttribute="trailing" constant="10" id="9MF-yq-RQv"/>
-                                                <constraint firstItem="TO5-ZB-djK" firstAttribute="top" secondItem="fYa-zG-rTn" secondAttribute="top" constant="10" id="CVx-Ti-4Il"/>
-                                                <constraint firstAttribute="bottom" secondItem="TO5-ZB-djK" secondAttribute="bottom" constant="10" id="S83-rA-Mer"/>
+                                                <constraint firstItem="TO5-ZB-djK" firstAttribute="top" secondItem="fYa-zG-rTn" secondAttribute="top" id="CVx-Ti-4Il"/>
+                                                <constraint firstAttribute="bottom" secondItem="TO5-ZB-djK" secondAttribute="bottom" id="S83-rA-Mer"/>
                                                 <constraint firstItem="TO5-ZB-djK" firstAttribute="leading" secondItem="fYa-zG-rTn" secondAttribute="leading" constant="10" id="kzc-Fq-o8f"/>
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="fYa-zG-rTn" secondAttribute="bottom" constant="10" id="Ses-1D-ttT"/>
                                         <constraint firstAttribute="trailing" secondItem="fYa-zG-rTn" secondAttribute="trailing" constant="10" id="VkU-HZ-6MC"/>
@@ -400,6 +424,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                         <constraint firstItem="fYa-zG-rTn" firstAttribute="leading" secondItem="2bg-wt-X8D" secondAttribute="leading" constant="10" id="ua2-OL-jkv"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="infoLabel" destination="jv8-yj-XMS" id="NLE-Pu-H4F"/>
                                     <outlet property="logoImage" destination="kht-X2-jym" id="X0F-fO-9uD"/>
@@ -420,7 +445,25 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5f-Dj-NXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102.8985507246377" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="1362" y="-106"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="243-Vs-0wa">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q44-ne-bvO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="szq-oh-1eY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="z2n-a8-mkz"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rcH-Et-6yV">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bD5-Bi-JSn" kind="relationship" relationship="rootViewController" id="LbO-eY-YJe"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-639" y="621"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="GLF-W2-1Jg">
@@ -437,36 +480,39 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1p-Kl-xm3" userLabel="Navigation Buttons View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="Pmy-eg-lpA">
-                                                        <rect key="frame" x="10" y="10" width="394" height="30"/>
+                                                        <rect key="frame" x="10" y="15" width="394" height="40"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNW-8O-CkP">
-                                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="30"/>
-                                                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="40"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="WAj-F6-Top"/>
+                                                                </constraints>
                                                                 <state key="normal" title="All">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="navigationButtonPressed:" destination="cT9-yJ-OoY" eventType="touchUpInside" id="pjY-eL-yd2"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNp-Dk-1V5">
-                                                                <rect key="frame" x="140.5" y="0.0" width="113" height="30"/>
-                                                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <rect key="frame" x="140.5" y="0.0" width="113" height="40"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Entrees">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="navigationButtonPressed:" destination="cT9-yJ-OoY" eventType="touchUpInside" id="KZn-Xp-HVr"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPS-oj-U86">
-                                                                <rect key="frame" x="280.5" y="0.0" width="113.5" height="30"/>
-                                                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <rect key="frame" x="280.5" y="0.0" width="113.5" height="40"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Other">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="navigationButtonPressed:" destination="cT9-yJ-OoY" eventType="touchUpInside" id="NJd-lN-Mgh"/>
@@ -479,19 +525,20 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" red="0.9882966876" green="0.816303432" blue="0.64531540870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.51055312159999999" green="0.68301874399999996" blue="0.78260892630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="F1L-qN-bzI"/>
+                                                    <constraint firstAttribute="height" constant="70" id="F1L-qN-bzI"/>
                                                     <constraint firstItem="Pmy-eg-lpA" firstAttribute="leading" secondItem="H1p-Kl-xm3" secondAttribute="leading" constant="10" id="GAC-2Y-xiu"/>
                                                     <constraint firstItem="Pmy-eg-lpA" firstAttribute="centerY" secondItem="H1p-Kl-xm3" secondAttribute="centerY" id="bGA-r4-T43"/>
                                                     <constraint firstAttribute="trailing" secondItem="Pmy-eg-lpA" secondAttribute="trailing" constant="10" id="w6Y-Ic-wdD"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPO-j7-4yU" userLabel="Collection View Container">
-                                                <rect key="frame" x="0.0" y="50" width="414" height="675"/>
+                                                <rect key="frame" x="0.0" y="70" width="414" height="655"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qog-dH-Jrx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="655"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0BD-PP-yM0">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -511,29 +558,29 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                                             <rect key="frame" x="10" y="10" width="371" height="198"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YmQ-VP-JrY">
-                                                                                    <rect key="frame" x="5" y="5" width="361" height="188"/>
+                                                                                    <rect key="frame" x="0.0" y="5" width="371" height="188"/>
                                                                                     <subviews>
-                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JrW-CW-IN6">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="122"/>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JrW-CW-IN6">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="371" height="122"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="Bj1-jN-5mJ"/>
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mni-Ui-gSt">
-                                                                                            <rect key="frame" x="0.0" y="130" width="361" height="58"/>
+                                                                                            <rect key="frame" x="0.0" y="130" width="371" height="58"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcO-H0-AId">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="25"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcO-H0-AId">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="25"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="height" constant="25" id="jaj-2M-wrj"/>
                                                                                                     </constraints>
-                                                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="22"/>
+                                                                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3e-CY-4G9">
-                                                                                                    <rect key="frame" x="0.0" y="33" width="361" height="25"/>
-                                                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3e-CY-4G9">
+                                                                                                    <rect key="frame" x="0.0" y="33" width="371" height="25"/>
+                                                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                                                     <nil key="textColor"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
@@ -554,9 +601,9 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                             <constraints>
                                                                                 <constraint firstItem="YmQ-VP-JrY" firstAttribute="top" secondItem="D0k-9P-xhf" secondAttribute="top" constant="5" id="43f-tO-bgM"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="YmQ-VP-JrY" secondAttribute="trailing" constant="5" id="fsW-5D-g0O"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="YmQ-VP-JrY" secondAttribute="trailing" id="fsW-5D-g0O"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="YmQ-VP-JrY" secondAttribute="bottom" constant="5" id="h4L-hC-0jz"/>
-                                                                                <constraint firstItem="YmQ-VP-JrY" firstAttribute="leading" secondItem="D0k-9P-xhf" secondAttribute="leading" constant="5" id="lOQ-RB-yer"/>
+                                                                                <constraint firstItem="YmQ-VP-JrY" firstAttribute="leading" secondItem="D0k-9P-xhf" secondAttribute="leading" id="lOQ-RB-yer"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
@@ -602,7 +649,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.9882966876" green="0.816303432" blue="0.64531540870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="FdR-Q0-PrG" firstAttribute="leading" secondItem="D3a-9x-8te" secondAttribute="leading" id="4NH-D1-JoK"/>
                             <constraint firstItem="FdR-Q0-PrG" firstAttribute="trailing" secondItem="D3a-9x-8te" secondAttribute="trailing" id="6o7-4W-NOj"/>
@@ -613,6 +660,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                     </view>
                     <navigationItem key="navigationItem" id="kJG-lc-QWz">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="AsX-WR-sQ7">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="favouriteButtonPressed:" destination="cT9-yJ-OoY" id="pks-XG-rrs"/>
                             </connections>
@@ -621,6 +669,7 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                     <connections>
                         <outlet property="collectionView" destination="Qog-dH-Jrx" id="y1r-mr-mBJ"/>
                         <outlet property="favoriteButton" destination="AsX-WR-sQ7" id="sFg-Vi-hDp"/>
+                        <outlet property="navigationButtonsContainer" destination="H1p-Kl-xm3" id="pYP-zD-Ep3"/>
                         <outletCollection property="navigationButtons" destination="kNW-8O-CkP" collectionClass="NSMutableArray" id="fj5-D8-YcU"/>
                         <outletCollection property="navigationButtons" destination="pPS-oj-U86" collectionClass="NSMutableArray" id="dvJ-F8-JfN"/>
                         <outletCollection property="navigationButtons" destination="nNp-Dk-1V5" collectionClass="NSMutableArray" id="5pa-XS-93z"/>
@@ -628,15 +677,15 @@ Terms and Conditions are also known as Terms of Service or Terms of Use.exercita
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVT-3R-R4X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2137.68115942029" y="-48.214285714285715"/>
+            <point key="canvasLocation" x="325" y="635"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.right" catalog="system" width="64" height="52"/>
         <image name="heart" catalog="system" width="64" height="54"/>
-        <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="person" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MYh-LM-PuI"/>
+        <segue reference="hxZ-nq-yL9"/>
     </inferredMetricsTieBreakers>
 </document>

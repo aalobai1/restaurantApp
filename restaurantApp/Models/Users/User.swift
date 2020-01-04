@@ -35,26 +35,30 @@ class User {
         }
     }
     
-    
     func signUp(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
                 completion(err, nil, nil)
             } else {
-                self.uuid = authUser!.user.uid
-                self.createUser(ofType: .client)
-                completion(nil, authUser, self)
+                self.sendVerificationEmail { (err) in
+                    if err != nil {
+                        completion(err, nil, nil)
+                    } else {
+                        self.uuid = authUser!.user.uid
+                        self.createUser(ofType: .client)
+                        completion(nil, authUser, self)
+                    }
+                }
             }
         }
     }
     
-    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {
+    func login(completion: @escaping (_ error: Error?,_ result: AuthDataResult?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (authUser, err) in
             if err != nil {
-                completion(err, nil, nil)
+                completion(err, nil)
             } else {
-                print(self.email)
-                completion(nil, authUser, self)
+                completion(nil, authUser)
             }
         }
     }
@@ -82,7 +86,7 @@ class User {
         
         collection.addDocument(data: userData) { (err) in
             if err != nil {
-                print("erro")
+                print("error")
             }
         }
     }
@@ -139,6 +143,20 @@ class User {
             }
         }
     }
-
+    
+    func sendVerificationEmail(completion: @escaping (_ sendEmailError: Error?) -> Void) {
+        let authUser = Auth.auth().currentUser
+        if authUser != nil && !authUser!.isEmailVerified {
+            authUser?.sendEmailVerification(completion: { (err) in
+                if err != nil {
+                    completion(err)
+                } else {
+                    completion(nil)
+                }
+            })
+        } else {
+            print("something went wrong")
+        }
+    }
 }
 
