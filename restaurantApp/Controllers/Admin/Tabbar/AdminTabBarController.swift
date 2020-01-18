@@ -15,8 +15,16 @@ class AdminTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(currentUser.adminRestaurants)
+        setupTabBar()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupTabBar() {
+        tabBar.backgroundColor = UIColor.white
+        tabBar.tintColor = UIColor(hexString: orangeAccent)
+        tabBar.shadowImage = UIImage()
+        tabBar.unselectedItemTintColor = UIColor(hexString: blueAccent)
     }
     
 

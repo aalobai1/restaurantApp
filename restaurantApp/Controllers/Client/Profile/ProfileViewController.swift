@@ -20,11 +20,21 @@ class ProfileViewController: UIViewController {
     
     var currentUser: User! {
         get {
-            let tabBar = self.tabBarController! as! ClientTabBarController
-            return tabBar.currentUser
+            if let tabBar = self.tabBarController! as? ClientTabBarController {
+                return tabBar.currentUser
+            } else if let tabBar = self.tabBarController! as? AdminTabBarController {
+                return tabBar.currentUser
+            } else {
+                return nil
+            }
         } set {
-            let tabBar = self.tabBarController! as! ClientTabBarController
-            tabBar.currentUser = newValue
+            if let tabBar = self.tabBarController! as? ClientTabBarController {
+                tabBar.currentUser = newValue
+            } else if let tabBar = self.tabBarController! as? AdminTabBarController {
+                tabBar.currentUser = newValue
+            } else {
+                return
+            }
         }
     }
     
@@ -33,7 +43,6 @@ class ProfileViewController: UIViewController {
         prefillValues()
         navigationItem.title = "Profile"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
         emailTextField.isUserInteractionEnabled = false
         passwordTextField.isUserInteractionEnabled = false
     }
@@ -76,14 +85,6 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func resetPasswordPressed(_ sender: UIButton) {
-        let currentUser = Auth.auth().currentUser
-        Auth.auth().sendPasswordReset(withEmail: currentUser!.email!) { (err) in
-            if err != nil {
-                self.alert(message: err!.localizedDescription)
-            } else {
-                self.alert(message: "A password reset email has been sent")
-            }
-        }
     }
     
     func getTextInput() {
@@ -101,8 +102,11 @@ class ProfileViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goTohHome" {
+        if segue.identifier == "goToHome" {
             self.hidesBottomBarWhenPushed = true
+            if let nextViewController = segue.destination as? LoginViewController {
+                nextViewController.shouldLoad = false
+            } 
         }
     }
 }

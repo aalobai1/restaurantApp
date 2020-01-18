@@ -1,18 +1,17 @@
 //
-//  RestaurantListTableViewController.swift
+//  FavouriteRestaurantsTableViewController.swift
 //  restaurantApp
 //
-//  Created by Ali Alobaidi on 12/24/19.
+//  Created by Ali Alobaidi on 12/27/19.
 //  Copyright © 2019 Ali Alobaidi. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
 class AdminRestaurantsTableViewController: UITableViewController, UISearchResultsUpdating {
     var resultSearchController = UISearchController()
-    var availableRestaurants = [Restaurant]()
-    var filteredRestaurants = [Restaurant]()
-    
+       
     var restaurants: Restaurants! {
         get {
             let tabBar = self.tabBarController! as! AdminTabBarController
@@ -27,20 +26,42 @@ class AdminRestaurantsTableViewController: UITableViewController, UISearchResult
         get {
             let tabBar = self.tabBarController! as! AdminTabBarController
             return tabBar.currentUser
-        } set {
+        }
+        set {
             let tabBar = self.tabBarController! as! AdminTabBarController
             tabBar.currentUser = newValue
         }
     }
     
+    var availableRestaurants = [Restaurant]()
+    var filteredRestaurants = [Restaurant]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        
+        let refreshControl = UIRefreshControl()
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        filterForAdminRestaurants()
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        configureTableView()
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resultSearchController.dismiss(animated: false, completion: nil)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,7 +75,7 @@ class AdminRestaurantsTableViewController: UITableViewController, UISearchResult
             return availableRestaurants.count
         }
     }
-    
+       
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToEditView", sender: nil)
     }
@@ -81,8 +102,7 @@ extension AdminRestaurantsTableViewController {
         filteredRestaurants.removeAll(keepingCapacity: false)
         
         let filteredItems = availableRestaurants.filter { (restaurant) -> Bool in
-            let name = restaurant.name.lowercased()
-            return (name.contains(searchController.searchBar.text!.lowercased()))
+            return (restaurant.name.contains(searchController.searchBar.text!))
         }
         
         filteredRestaurants = filteredItems
@@ -94,21 +114,33 @@ extension AdminRestaurantsTableViewController {
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.searchBar.sizeToFit()
-            controller.hidesNavigationBarDuringPresentation = false
             
-            controller.searchBar.placeholder = "Find your restaurant!"
+            controller.searchBar.searchBarStyle = .default
+            controller.obscuresBackgroundDuringPresentation = false
+            
+            controller.searchBar.setTextField(color: UIColor.white)
+            controller.searchBar.set(textColor: UIColor.black)
+            controller.searchBar.setSearchImage(color: UIColor.black)
+            
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.placeholder = "Find a restaurant!"
+            controller.searchBar.isTranslucent = false
+            
             tableView.tableHeaderView = controller.searchBar
-
             return controller
         })()
     }
     
     func configureTableView() {
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 200
-        self.tableView.separatorStyle = .none
-        self.navigationItem.title = "Available Restaurants"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!]
+        tableView.rowHeight = 110
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.white
+        
+        navigationItem.title = "Your Restaurants"
+        navigationController?.navigationBar.layer.borderWidth = 0.0
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        
         
         setupSearch()
         fetchRestaurants()
@@ -121,9 +153,24 @@ extension AdminRestaurantsTableViewController {
                 self.alert(message: err!.localizedDescription)
             } else {
                 self.availableRestaurants = self.restaurants.availableRestaurants
-                self.tableView.reloadData()
+                self.filterForAdminRestaurants()
             }
         }
+    }
+    
+    func filterForAdminRestaurants() {
+        if (!currentUser.adminRestaurants.isEmpty) {
+            self.availableRestaurants = self.restaurants.filterForRestaurants(favouriteRestaurantIds: currentUser.adminRestaurants)
+            self.tableView.reloadData()
+        } else {
+            self.availableRestaurants = []
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        resultSearchController.searchBar.resignFirstResponder()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

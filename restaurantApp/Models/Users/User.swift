@@ -20,19 +20,26 @@ class User {
     var uuid: String!
     var type: UserType! = .client
     var favouriteRestaurants: [String] = []
+    var adminRestaurants: [String] = []
     
     init(email: String, password: String) {
         self.email = email
         self.password = password
     }
     
-    convenience init(email: String, uuid: String, type: String, favouriteRestaurants: [String]?) {
+    convenience init(email: String, uuid: String, type: String, favouriteRestaurants: [String]?, adminRestaurants: [String]?) {
         self.init(email: email, password: "")
         self.uuid = uuid
         self.type = UserType(rawValue: type)
+        
         if favouriteRestaurants != nil {
             self.favouriteRestaurants = favouriteRestaurants!
         }
+        
+        if adminRestaurants != nil {
+            self.adminRestaurants = adminRestaurants!
+        }
+        
     }
     
     func signUp(completion: @escaping (_ error: Error?,_ result: AuthDataResult?,_ user: User?) -> Void) {

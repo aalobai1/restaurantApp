@@ -10,11 +10,6 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-enum MenuItemType: String {
-    case Entree = "Entree"
-    case Other = "Other"
-}
-
 class Restaurant {
     var name: String
     var uid: String
@@ -32,6 +27,72 @@ class Restaurant {
         self.uid = uid
     }
     
+    func deleteImage(completion: @escaping (_ error: Error?) -> Void) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference(forURL: logoImageUrl)
+
+        //Removes image from storage
+        storageRef.delete { error in
+            if let error = error {
+                if error.localizedDescription.contains("does not exist") {
+                    completion(nil)
+                    return
+                }
+                completion(error)
+            } else {
+                completion(nil)
+                self.logoImageUrl = ""
+            }
+        }
+    }
+    
+    func uploadImage(image: UIImage, completion: @escaping (_ error: Error?) -> Void) {
+        let storageRef = Storage.storage().reference().child("restaurant_logos/\(name.camelCaseToSnakeCase())/\(name)-\(UUID().uuidString).jpg")
+           if let uploadData = image.jpegData(compressionQuality: 0.25) {
+               storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                   if error != nil {
+                       completion(error)
+                   } else {
+                    self.logoImageUrl = imageLocationUrlBase + metadata!.path!
+                    completion(nil)
+                   }
+               }
+           }
+    }
+    
+    func updateValues(name: String?, location: String?) {
+        if (name != nil) {
+            self.name = name!
+        }
+        
+        if (location != nil) {
+            self.location = location!
+        }
+    }
+    
+    func update() {
+        let db = Firestore.firestore()
+        let collection = db.collection("restaurants")
+        
+        collection.document(self.uid).updateData([
+            "name" : self.name,
+            "location" : self.location,
+            "logoImageUrl" : self.logoImageUrl
+        ])
+    }
+    
+    func createRestaurant() {
+        let db = Firestore.firestore()
+        let collection = db.collection("restaurants")
+        
+        collection.addDocument(data: [
+            "name" : self.name,
+            "location" : self.location,
+            "logoImageUrl" : self.logoImageUrl,
+            "menuId" : self.menuId
+        ])
+    }
+    
     func fetchMenu(completion: @escaping (_ error: Error?) -> Void) {
         let db = Firestore.firestore()
         let document = db.collection("menu").document(self.menuId)
@@ -41,18 +102,10 @@ class Restaurant {
                 completion(err)
             } else {
                 let restaurantName = document!.get("restaurantName") as? String
-                let menuItemsArray = document!.get("menuItems") as? [[String: String]]
-                var menuItems: [MenuItem] = []
-                    
-                menuItems = menuItemsArray!.map({ (item) in
-                    let name = item["name"]!
-                    let description = item["description"]!
-                    let type = MenuItemType(rawValue: item["type"]!)!
-                    let imageUrl = item["imageUrl"]!
-                    return MenuItem(name: name, description: description, type: type, imageUrl: imageUrl)
-                })
+                let uuid = document!.get("uuid") as! String
+                let menuItems: [MenuItem] = []
             
-                self.menu = Menu(restaurantName: restaurantName!, menuItems: menuItems)
+                self.menu = Menu(restaurantName: restaurantName!, menuItems: menuItems, uuid: uuid)
                 completion(nil)
             }
         }

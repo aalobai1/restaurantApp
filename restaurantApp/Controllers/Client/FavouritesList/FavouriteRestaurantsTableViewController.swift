@@ -38,20 +38,30 @@ class FavouriteRestaurantsTableViewController: UITableViewController, UISearchRe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Favorite Restaurants"
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.layer.borderWidth = 0.0
         configureTableView()
+        
+        let refreshControl = UIRefreshControl()
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        filterForFavouriteRestaurants()
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         filterForFavouriteRestaurants()
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
-        navigationController?.navigationBar.layer.borderWidth = 0.0
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resultSearchController.dismiss(animated: false, completion: nil)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,19 +114,33 @@ extension FavouriteRestaurantsTableViewController {
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.searchBar.sizeToFit()
-
+            
+            controller.searchBar.searchBarStyle = .default
+            controller.obscuresBackgroundDuringPresentation = false
+            
+            controller.searchBar.setTextField(color: UIColor.white)
+            controller.searchBar.set(textColor: UIColor.black)
+            controller.searchBar.setSearchImage(color: UIColor.black)
+            
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.placeholder = "Find a restaurant!"
+            controller.searchBar.isTranslucent = false
+            
             tableView.tableHeaderView = controller.searchBar
-
             return controller
         })()
     }
     
     func configureTableView() {
-//        self.tableView.register(RestaurantCell.self, forCellReuseIdentifier: "Cell")
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 200
-        self.tableView.separatorStyle = .none
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!]
+        tableView.rowHeight = 110
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.white
+        
+        navigationItem.title = "Favorite Restaurants"
+        navigationController?.navigationBar.layer.borderWidth = 0.0
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
+        
         
         setupSearch()
         tableView.reloadData()
@@ -124,12 +148,17 @@ extension FavouriteRestaurantsTableViewController {
     
     func filterForFavouriteRestaurants() {
         if (!currentUser.favouriteRestaurants.isEmpty) {
-            self.availableRestaurants = self.restaurants.favouriteRestaurants(favouriteRestaurantIds: currentUser.favouriteRestaurants)
+            self.availableRestaurants = self.restaurants.filterForRestaurants(favouriteRestaurantIds: currentUser.favouriteRestaurants)
             self.tableView.reloadData()
         } else {
             self.availableRestaurants = []
             self.tableView.reloadData()
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        resultSearchController.searchBar.resignFirstResponder()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

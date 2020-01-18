@@ -11,10 +11,8 @@ import UIKit
 
 extension String {
     func camelCaseToSnakeCase() -> String {
-        let acronymPattern = "([A-Z]+)([A-Z][a-z]|[0-9])"
-        let normalPattern = "([a-z0-9])([A-Z])"
-        return self.processCamalCaseRegex(pattern: acronymPattern)?
-            .processCamalCaseRegex(pattern: normalPattern)?.lowercased() ?? self.lowercased()
+        let lowerCased = self.lowercased()
+        return lowerCased.replacingOccurrences(of: " ", with: "_")
     }
     
     fileprivate func processCamalCaseRegex(pattern: String) -> String? {
@@ -83,4 +81,19 @@ extension CALayer {
       shadowPath = UIBezierPath(rect: rect).cgPath
     }
   }
+}
+
+extension UIView {
+    func pinEdges(to other: UIView) {
+        leadingAnchor.constraint(equalTo: other.leadingAnchor).isActive = true
+        trailingAnchor.constraint(equalTo: other.trailingAnchor).isActive = true
+        topAnchor.constraint(equalTo: other.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: other.bottomAnchor).isActive = true
+    }
+}
+
+extension Dictionary where Value: Equatable {
+    func key(forValue value: Value) -> Key? {
+        return first { $0.1 == value }?.0
+    }
 }

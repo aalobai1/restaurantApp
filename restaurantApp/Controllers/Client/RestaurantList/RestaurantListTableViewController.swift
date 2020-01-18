@@ -45,15 +45,30 @@ class RestaurantListCollectionViewController: UITableViewController, UISearchRes
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refreshControl = UIRefreshControl()
+               
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
         configureTableView()
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
         navigationController?.navigationBar.layer.borderWidth = 0.0
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resultSearchController.dismiss(animated: false, completion: nil)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,6 +124,7 @@ extension RestaurantListCollectionViewController {
             controller.searchBar.sizeToFit()
             
             controller.searchBar.searchBarStyle = .default
+            controller.obscuresBackgroundDuringPresentation = false
             
             controller.searchBar.setTextField(color: UIColor.white)
             controller.searchBar.set(textColor: UIColor.black)
@@ -124,12 +140,10 @@ extension RestaurantListCollectionViewController {
     }
     
     func configureTableView() {
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = 110
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.white
         
-        navigationController?.navigationBar.barTintColor = UIColor(hexString: orangeAccent)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Montserrat-Bold", size: 25)!, NSAttributedString.Key.foregroundColor : UIColor.white]
         
         self.navigationItem.title = "Available Restaurants"
@@ -145,9 +159,16 @@ extension RestaurantListCollectionViewController {
                 self.alert(message: err!.localizedDescription)
             } else {
                 self.availableRestaurants = self.restaurants.availableRestaurants
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

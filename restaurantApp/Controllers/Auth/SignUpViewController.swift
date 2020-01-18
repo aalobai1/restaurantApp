@@ -50,12 +50,15 @@ class SignUpViewController: UIViewController {
      }
      
     func goToNextScreen(error: Error?, authUser: AuthDataResult?, user: User?) {
-        dismiss(animated: false) {
+        dismiss(animated: true) {
             if error != nil {
                 self.alert(message: error!.localizedDescription, title: "Oops something wen't wrong")
             } else if authUser != nil {
-               self.currentUser = user
-               self.performSegue(withIdentifier: "goToHomeScreen", sender: nil)
+                self.alert(message: "A verification email has been sent!", title: "") { (_ alertAction) in
+                    self.dismiss(animated: true) {
+                         self.performSegue(withIdentifier: "goToLoginScreen", sender: nil)
+                    }
+                }
             }
         }
      }
@@ -90,15 +93,5 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController {
     func checkPassword(password: String, confirmedPassword: String) -> Bool {
              return password == confirmedPassword
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToHomeScreen" {
-            if let nextViewController = segue.destination as? ClientTabBarController {
-                nextViewController.currentUser = self.currentUser
-                nextViewController.usersStore = self.usersStore
-                nextViewController.restaurants = self.restaurants
-            }
-        }
     }
 }

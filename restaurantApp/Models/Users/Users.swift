@@ -24,8 +24,15 @@ class Users {
                    let email = document.get("email") as! String
                    let type = document.get("type") as! String
                    let uuid = document.get("uuid") as! String
-                    let favouriteRestaurants = document.get("favouriteRestaurants") as? [String]
-                   completion(User(email: email, uuid: uuid, type: type, favouriteRestaurants: favouriteRestaurants), nil)
+                   let favouriteRestaurants = document.get("favouriteRestaurants") as? [String]
+                    
+                    var adminRestaurants: [String]?
+                    
+                    if type == "admin" {
+                       adminRestaurants = document.get("adminRestaurants") as? [String]
+                    }
+                    
+                   completion(User(email: email, uuid: uuid, type: type, favouriteRestaurants: favouriteRestaurants, adminRestaurants: adminRestaurants), nil)
                 }
             }
         }
@@ -43,7 +50,7 @@ class Users {
                     let type = document.get("type") as! String
                     let uuid = document.get("uuid") as! String
                     let favouriteRestaurants = document.get("favouriteRestaurants") as? [String]
-                    let user = User(email: email, uuid: uuid, type: type, favouriteRestaurants: favouriteRestaurants)
+                    let user = User(email: email, uuid: uuid, type: type, favouriteRestaurants: favouriteRestaurants, adminRestaurants: nil)
                     self.allUsers.append(user)
                 }
                 completion()
